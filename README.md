@@ -38,9 +38,13 @@ node tools/gen-misspellings.js
 
 ## Privacy
 
-No accounts, no ads, no analytics, no third-party scripts. A first name and the
-level progress live in the browser's own local storage on that one device and
-are never transmitted. A parent reset on the start screen erases all of it.
+No accounts, no ads, no cookies, no advertising or profiling scripts. The child's
+name and progress live in `localStorage` on that device only and are never
+transmitted. The one server request is an anonymous page-view count through
+Cloudflare Web Analytics: cookieless, no fingerprinting, no cross-site tracking,
+and it identifies nobody. The game still works offline after the first load; the
+beacon simply fails silently.
+A parent reset on the start screen erases all saved progress.
 
 ## Checking content
 
