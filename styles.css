@@ -32,11 +32,10 @@ html { -webkit-text-size-adjust: 100%; }
    questions stay on plain white. */
 body {
   background:
-    radial-gradient(1100px 640px at 10% -10%, #FFE6C7 0%, transparent 62%),
-    radial-gradient(980px 600px at 94% 2%, #FFD9E4 0%, transparent 64%),
-    radial-gradient(900px 660px at 48% 110%, #E6DCFF 0%, transparent 62%),
-    radial-gradient(700px 520px at 88% 82%, #FFF3C4 0%, transparent 62%),
-    linear-gradient(180deg, #FFF6EC 0%, #FFF1F5 52%, #F5F1FF 100%);
+    radial-gradient(1200px 700px at 8% -12%, #FFF8EF 0%, transparent 60%),
+    radial-gradient(1050px 640px at 96% 0%, #FFF4F7 0%, transparent 62%),
+    radial-gradient(980px 700px at 50% 112%, #F8F5FF 0%, transparent 60%),
+    linear-gradient(180deg, #FFFDFA 0%, #FFFCFD 55%, #FCFBFF 100%);
   background-attachment: fixed;
   color: var(--ink);
   font-family: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
@@ -48,7 +47,7 @@ body::before {
   content: '';
   position: fixed; inset: -120px;
   z-index: -1; pointer-events: none;
-  opacity: .1;
+  opacity: .07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 176h34a10 10 0 0 1 10 10v34H40a10 10 0 0 1-10-10z' stroke='%23C2410C'/%3E%3Cpath d='M118 176H84a10 10 0 0 0-10 10v34h34a10 10 0 0 0 10-10z' stroke='%23C2410C'/%3E%3Cpath d='M168 42l26 26-52 52-30 4 4-30z' stroke='%23F59E0B'/%3E%3Cpath d='M112 124l30-4' stroke='%23F59E0B'/%3E%3Cpath d='M40 44q-12 0-12 12t12 12q0 14-14 18M74 44q-12 0-12 12t12 12q0 14-14 18' stroke='%23DB2777'/%3E%3Cpath d='M196 220l16-42 16 42M202 206h20' stroke='%237C3AED'/%3E%3Cpath d='M128 96h26M141 96v30' stroke='%230E9F6E'/%3E%3Cpath d='M226 128q3 12 14 15q-11 3-14 15q-3-12-14-15q11-3 14-15z' fill='%23F59E0B' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
   animation: drift 200s linear infinite;
 }
@@ -412,28 +411,6 @@ footer a { color: var(--blue); }
 @media (max-width: 340px) {
   .gamename { font-size: .56rem; padding: 2px 5px; }
   #switchBtn { font-size: .64rem !important; }
-}
-
-/* ---------- keeping the reading area calm ----------
-   The decorated sky was pulling attention off the question. The pattern now
-   sits at a tenth opacity and drifts slowly, and a soft light band runs down
-   the middle of the page so the column a child actually reads sits on calm
-   ground while the decoration stays out at the edges. */
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  z-index: -1; pointer-events: none;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    #FFFFFFB8 16%,
-    #FFFFFFDE 30%,
-    #FFFFFFDE 70%,
-    #FFFFFFB8 84%,
-    transparent 100%);
-}
-@media (max-width: 900px) {
-  /* On a phone the column is nearly the whole width, so wash the lot. */
-  body::after { background: #FFFFFFC4; }
 }
 
 /* Locked levels must be fully opaque: the pattern was showing through and
