@@ -1,0 +1,89 @@
+<meta charset="utf-8">
+<title>Word Factory · Every question type</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="styles.css?v=20260830123934">
+<style>
+  .pv { max-width: 900px; margin: 0 auto; padding: 18px; }
+  .pv h1 { margin-bottom: 6px; }
+  .pvbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 18px; position: sticky; top: 0; z-index: 5;
+           background: #F7F9FFEE; padding: 10px 0; backdrop-filter: blur(6px); }
+  .pvbar button { border: 2px solid var(--line); background: #fff; border-radius: 999px;
+                  padding: 7px 14px; font-weight: 800; color: var(--muted); }
+  .pvbar button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); background: #EEF3FF; }
+  .pvitem { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 12px;
+            box-shadow: var(--shadow); }
+  .pvhead { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 8px; }
+  .pvhead b { font-size: 1rem; }
+  .pvq { font-size: 1.05rem; font-weight: 800; margin: 6px 0; }
+  .pvsub { color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+  .pvvis { margin: 10px 0; }
+  .pvch { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .pvch span { border: 2px solid var(--line); border-radius: 10px; padding: 6px 12px; font-weight: 800; font-size: .92rem; }
+  .pvch span.ok { border-color: var(--green); color: var(--green); background: var(--green-soft); }
+  .pvwhy { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+  .pvmeta { font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
+</style>
+
+<div class="top">
+  <a class="wordmark" href="https://mehdee.com/games/" aria-label="The Mehdees, all games">
+    <span class="the">The</span><span class="mehdees">MEHDEES</span>
+  </a>
+  <span class="spacer"></span>
+  <button class="btn btn--ghost" id="reroll">New examples</button>
+</div>
+
+<div class="pv">
+  <h1>Every question type</h1>
+  <p class="lede">One live example of all <b id="count">0</b> topics, so you can check a question without playing to it.
+  The green choice is the correct one. Press <b>New examples</b> to draw fresh numbers.</p>
+  <div class="pvbar" id="tabs"></div>
+  <div id="list"></div>
+</div>
+
+<script src="content.js?v=20260830123934"></script>
+<script>
+(function () {
+  var grade = 3;
+  var $ = function (id) { return document.getElementById(id); };
+
+  var total = 0;
+  for (var g = 1; g <= 5; g++) total += GRADES[g].length;
+  $('count').textContent = total;
+
+  [1, 2, 3, 4, 5].forEach(function (g) {
+    var b = document.createElement('button');
+    b.textContent = 'Grade ' + g + ' (' + GRADES[g].length + ')';
+    b.onclick = function () { grade = g; render(); };
+    b.dataset.g = g;
+    $('tabs').appendChild(b);
+  });
+
+  function render() {
+    $('tabs').querySelectorAll('button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.dataset.g) === grade));
+    });
+    var out = '';
+    GRADES[grade].forEach(function (t) {
+      var q;
+      try { q = t.gen(); } catch (e) { q = { q: 'ERROR: ' + e.message, choices: [], a: '' }; }
+      var ch = (q.choices || []).map(function (c) {
+        return '<span class="' + (String(c) === String(q.a) ? 'ok' : '') + '">' + c + '</span>';
+      }).join('');
+      out += '<div class="pvitem">'
+        + '<div class="pvhead"><b>' + t.t + '</b><span class="pvmeta">' + t.b + ' · ' + t.id + '</span></div>'
+        + '<div class="pvq">' + q.q + '</div>'
+        + (q.sub ? '<div class="pvsub">' + q.sub + '</div>' : '')
+        + (q.visual ? '<div class="pvvis">' + q.visual + '</div>' : '')
+        + '<div class="pvch">' + ch + '</div>'
+        + '<div class="pvwhy"><b>Why:</b> ' + (q.why || '') + '</div>'
+        + (HOW[t.id] ? '<div class="pvwhy"><b>Help:</b> ' + HOW[t.id].steps.join(' ') + ' <i>' + HOW[t.id].eg + '</i></div>' : '<div class="pvwhy" style="color:#C6274B"><b>NO HELP CARD</b></div>')
+        + '</div>';
+    });
+    $('list').innerHTML = out;
+  }
+
+  $('reroll').onclick = render;
+  render();
+})();
+</script>

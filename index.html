@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Factory · Spelling and Words, Grades 1 to 5 · The Mehdees</title>
+<meta name="description" content="Free math practice for grades 1 to 5, built on Florida's B.E.S.T. benchmarks. Pick your grade, practice a skill, take a mixed challenge, and print a report card. No sign up, nothing leaves your device.">
+<meta name="theme-color" content="#2563EB">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563EB'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%2B%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/baloo2.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/pacifico.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=20260830123934">
+<meta property="og:title" content="Math Arena · Practice Grades 1 to 5">
+<meta property="og:description" content="Free, standards-aligned math practice for grades 1 to 5. No sign up. Nothing leaves your device.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://word.mehdee.com/">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="https://mehdee.com/games/" aria-label="The Mehdees, all games">
+    <span class="the">The</span><span class="mehdees">MEHDEES</span>
+  </a>
+  <button class="gamename" id="homeBtn" type="button" title="Back to the skills list">Word Factory</button>
+  <span class="spacer"></span>
+  <button class="btn btn--ghost hide" id="switchBtn" style="padding:7px 13px;font-size:.85rem"
+          title="Change the name or grade" aria-label="Change the name or grade">Change</button>
+</header>
+
+<main class="wrap">
+
+  <!-- 1. who is playing -->
+  <section id="screenStart" class="stack">
+    <h1>Word Factory</h1>
+    <p class="lede">Spelling, word parts and word meaning, one skill at a time. Built on Florida's B.E.S.T. benchmarks for English Language Arts, grades 1 to 5.</p>
+    <div class="card stack">
+      <div>
+        <label for="nameInput">What's your name?</label>
+        <input type="text" id="nameInput" maxlength="24" autocomplete="off" spellcheck="false" placeholder="Type your first name">
+        <p class="small muted" style="margin-top:8px">Your name stays on this device. Nothing is sent anywhere, and there is no sign up.</p>
+        <p class="note hide" id="storageNote"></p>
+      </div>
+      <div>
+        <label>Pick your grade</label>
+        <div class="grades" id="gradePicker"></div>
+      </div>
+      <button class="btn btn--big" id="startBtn" disabled>Let's go</button>
+    </div>
+  </section>
+
+  <!-- 2. pick a topic -->
+  <section id="screenMenu" class="stack hide">
+    <div>
+      <h1 id="menuTitle">Grade 3</h1>
+      <p class="lede" id="menuSub"></p>
+    </div>
+    <button class="btn btn--green btn--big" id="mixedBtn">Mixed challenge · every skill, any time</button>
+    <div class="topics" id="topicList"></div>
+    <button class="btn btn--ghost btn--big" id="reportBtn">See my report card</button>
+    <p class="parentline">
+      Grown-ups: <button class="linkbtn" id="resetBtn" type="button">reset this device</button>
+    </p>
+  </section>
+
+  <!-- 3. playing -->
+  <section id="screenPlay" class="stack hide">
+    <div class="hud">
+      <span class="pill" id="playTopic">Topic</span>
+      <span class="hearts" id="hearts">❤️❤️❤️</span>
+      <div class="bar"><i id="progressBar" style="width:0%"></i></div>
+      <span class="small muted" id="counter">1 / 10</span>
+    </div>
+    <div class="card">
+      <p class="q" id="question">Question</p>
+      <p class="qsub hide" id="questionSub"></p>
+      <div class="visual hide" id="visual"></div>
+      <button class="helpbtn" id="helpBtn" type="button" aria-expanded="false">
+        <span aria-hidden="true">💡</span> How do I do this?
+      </button>
+      <div class="help hide" id="help"></div>
+      <div class="choices" id="choices"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="btn btn--big hide" id="nextBtn" style="margin-top:14px">Next</button>
+    </div>
+    <div class="playfoot">
+      <button class="btn btn--ghost" id="quitBtn">Back to skills</button>
+    </div>
+  </section>
+
+  <!-- 4. round finished -->
+  <section id="screenDone" class="stack hide">
+    <div class="card center stack">
+      <p class="result-num" id="doneScore">8/10</p>
+      <h2 id="doneTitle">Nice work!</h2>
+      <p class="muted" id="doneMsg"></p>
+      <button class="btn btn--big" id="againBtn">Play again</button>
+      <button class="btn btn--ghost btn--big" id="backBtn">Back to skills</button>
+      <p class="small muted">Progress is kept in this browser only. In a private window it disappears when the window closes, so download the report card if you want to keep it.</p>
+    </div>
+  </section>
+
+  <!-- 5. report card -->
+  <section id="screenReport" class="stack hide">
+    <h1>Report card</h1>
+    <div class="report" id="reportBody"></div>
+    <button class="btn btn--big" id="downloadBtn">Download report card</button>
+    <button class="btn btn--ghost btn--big" id="reportBackBtn">Back to skills</button>
+  </section>
+
+</main>
+
+<!-- parents: wipe everything this browser has stored -->
+<div class="pad sheet" id="reset" role="dialog" aria-modal="true" aria-labelledby="resetTitle">
+  <div class="sheet__box">
+    <h2 id="resetTitle">Reset this device?</h2>
+    <p>This permanently deletes everything Math Arena has saved in this browser:</p>
+    <ul class="sheet__list">
+      <li>The name typed on the start screen</li>
+      <li>Every grade's level progress and stars</li>
+      <li>The question and accuracy totals on the report card</li>
+    </ul>
+    <p class="sheet__warn"><b>This cannot be undone.</b> Download the report card first if you want to keep it.</p>
+    <p class="small muted">Nothing was ever sent to a server, so this is the only copy. Resetting affects this browser on this device only.</p>
+    <label class="sheet__check"><input type="checkbox" id="resetOk"> I understand this erases all saved progress.</label>
+    <div class="sheet__row">
+      <button class="btn btn--ghost" id="resetCancel" type="button">Cancel</button>
+      <button class="btn btn--danger" id="resetGo" type="button" disabled>Delete everything</button>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  A free practice game by <a href="https://mehdee.com/games/">The Mehdees</a>.
+  Aligned to Florida's B.E.S.T. ELA benchmarks. Not affiliated with the Florida Department of Education.
+  <br>No accounts, no ads, no tracking. Everything stays in your browser.
+</footer>
+
+<script src="content.js?v=20260830123934"></script>
+<script src="app.js?v=20260830123934"></script>
+</body>
+</html>
