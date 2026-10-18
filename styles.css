@@ -1,8 +1,7 @@
-/* The Mehdees wordmark, identical to the mehdee.com masthead: Pacifico "The"
-   tilted in sunset pink, Baloo 2 "MEHDEES" in cream with a pink glow, sitting
-   on the same night-violet bar. */
-@font-face { font-family: 'Baloo 2'; font-weight: 800; font-display: swap; src: url('fonts/baloo2.woff2') format('woff2'); }
-@font-face { font-family: 'Pacifico'; font-weight: 400; font-display: swap; src: url('fonts/pacifico.woff2') format('woff2'); }
+/* The Mehdees wordmark, identical to the mehdee.com masthead: the red 4x4
+   mark and "THE MEHDEES" in Archivo Black, on the same night-ink bar. */
+@font-face { font-family: 'Archivo Black'; font-weight: 400 900; font-display: swap; src: url('fonts/archivo-black.woff2') format('woff2'); }
+@font-face { font-family: 'Archivo'; font-weight: 400 800; font-display: swap; src: url('fonts/archivo.woff2') format('woff2'); }
 
 /* Math Arena. Bright, high contrast, big targets, mobile first. */
 :root {
@@ -39,7 +38,7 @@ body {
     linear-gradient(180deg, #FFF9F2 0%, #FFF4F8 55%, #F8F5FF 100%);
   background-attachment: fixed;
   color: var(--ink);
-  font-family: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
+  font-family: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
   line-height: 1.5;
   min-height: 100vh;
   position: relative;
@@ -61,23 +60,15 @@ button { font: inherit; cursor: pointer; }
 .wrap { max-width: 760px; margin: 0 auto; padding: var(--pad); }
 .top {
   display: flex; align-items: center; gap: 12px;
-  padding: 11px var(--pad); background: #150F2B; border-bottom: 1px solid #37276360;
+  padding: 11px var(--pad); background: #141A2E; border-bottom: 1px solid #5A3E7855;
   position: sticky; top: 0; z-index: 20;
 }
-.wordmark { display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
-.wordmark .the {
-  font-family: 'Pacifico', 'Snell Roundhand', cursive;
-  font-size: 1.05rem;
-  color: #FF2D95;
-  transform: rotate(-4deg) translateY(-2px);
-}
+.wordmark { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+.wordmark .wm-car { width: 40px; height: auto; flex: none; }
 .wordmark .mehdees {
-  font-family: 'Baloo 2', 'Arial Rounded MT Bold', system-ui, sans-serif;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.02em;
-  color: #FCF2E1;
-  text-shadow: 0 0 18px #ff2d9538;
+  font-family: 'Archivo Black', 'Arial Black', system-ui, sans-serif;
+  font-weight: 400; font-size: 1.12rem; letter-spacing: 0.03em; text-transform: uppercase;
+  color: #FBF5E6;
 }
 .top .spacer { margin-left: auto; }
 .pill {
@@ -91,7 +82,7 @@ button { font: inherit; cursor: pointer; }
 .pill--green { background: var(--green-soft); color: var(--green); border-color: #B6E7D3; }
 .pill--amber { background: #FEF3C7; color: #92610A; border-color: #FBD98B; }
 
-h1, h2 { font-family: 'Baloo 2', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif; }
+h1, h2 { font-family: 'Archivo Black', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif; }
 h1 { font-size: clamp(1.6rem, 5vw, 2.3rem); line-height: 1.12; letter-spacing: -0.01em; }
 h2 { font-size: 1.15rem; }
 .lede { color: var(--muted); margin-top: 8px; }
@@ -198,7 +189,7 @@ footer a { color: var(--blue); }
 .pad__bar {
   display: flex; align-items: center; gap: 12px;
   padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
-  background: #150F2B;
+  background: #141A2E;
 }
 .pad__q {
   flex: 1; min-width: 0; color: #FCF2E1; font-weight: 800; font-size: 1.05rem;
@@ -252,7 +243,7 @@ footer a { color: var(--blue); }
   background: #FFFCF4; border: 2px solid #FBD98B; border-radius: 14px;
 }
 .help h3 {
-  font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+  font-family: 'Archivo Black', ui-rounded, system-ui, sans-serif;
   font-size: 1rem; color: #92610A; margin-bottom: 3px;
 }
 .help .bench {
@@ -282,7 +273,7 @@ footer a { color: var(--blue); }
   max-width: 460px; width: 100%; box-shadow: 0 24px 60px #17203a55;
   max-height: 92vh; overflow: auto;
 }
-.sheet__box h2 { font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif; font-size: 1.35rem; margin-bottom: 10px; }
+.sheet__box h2 { font-family: 'Archivo Black', ui-rounded, system-ui, sans-serif; font-size: 1.35rem; margin-bottom: 10px; }
 .sheet__box p { margin-bottom: 12px; }
 .sheet__list { margin: 0 0 12px 20px; color: var(--muted); }
 .sheet__list li { margin-bottom: 4px; }
@@ -324,7 +315,7 @@ footer a { color: var(--blue); }
 /* The game's own name beside the wordmark, so a child landing here knows
    which of the games they are in. */
 .gamename {
-  font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif;
+  font-family: 'Archivo Black', ui-rounded, system-ui, sans-serif;
   font-weight: 800; font-size: .95rem; color: #FCF2E1;
   padding: 3px 11px; border-radius: 999px;
   background: #ffffff1f; border: 1px solid #ffffff2e;
@@ -350,7 +341,7 @@ footer a { color: var(--blue); }
 
 @media (max-width: 720px) {
   .top { gap: 8px; padding: 9px 12px; }
-  .wordmark .the { font-size: .92rem; }
+  .wordmark .wm-car { width: 34px; }
   .wordmark .mehdees { font-size: 1.08rem; }
   .gamename { font-size: .76rem; padding: 2px 9px; }
   .top .pill { font-size: .72rem; padding: 4px 9px; }
@@ -391,14 +382,14 @@ footer a { color: var(--blue); }
 @media (max-width: 360px) {
   .top { gap: 6px; padding: 8px 10px; }
   .wordmark { gap: 5px; }
-  .wordmark .the { font-size: .8rem; }
+  .wordmark .wm-car { width: 28px; }
   .wordmark .mehdees { font-size: .9rem; }
   .gamename { font-size: .66rem; padding: 2px 7px; }
   .top .btn { padding: 5px 9px !important; font-size: .72rem !important; }
 }
 
 /* The game name doubles as the way back to the skills list. */
-.gamename { cursor: pointer; font: inherit; font-family: 'Baloo 2', ui-rounded, system-ui, sans-serif; }
+.gamename { cursor: pointer; font: inherit; font-family: 'Archivo Black', ui-rounded, system-ui, sans-serif; }
 .gamename:hover { background: #ffffff33; border-color: #FF2D95; }
 
 /* Every phone width holds brand, game name, pencil and the player button, so
